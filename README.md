@@ -84,8 +84,8 @@ pacgit push origin develop
 git pull origin
 ```
 
-** If you want to add new :**
-You will need to use a terminal which is active with the virtual environment and use:
+**If you want to add new packages:**
+You will need to use a terminal which is active with the virtual environment and not with an active jupyter notbook, use:
 
 ```shell
 pip install <Packege name>
@@ -98,4 +98,11 @@ pip freeze > requirements.txt
 ```
 You can run this code directly from the command line with **"python hhproject.py"**.
 
-You can copy the entire formatted markdown block above.
+## Run in Jupyter ##
+
+Inside the virtual environment use:
+
+```shell
+jupyter notebook
+```
+

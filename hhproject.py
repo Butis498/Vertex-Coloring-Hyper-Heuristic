@@ -33,7 +33,7 @@ def characterize(domain: str, folder: str, features: List[str]):
         for f in features:
             text += str(round(problem.getFeature(f), 3)) + "\t"
         text += "\r\n"
-    print(text)
+    #print(text)
 
 
 def solve(domain: str, folder: str, heuristics: List[str]):
@@ -59,16 +59,16 @@ def solve(domain: str, folder: str, heuristics: List[str]):
             problem.solve(h)
             text += str(round(problem.getObjValue(), 3)) + "\t"
         text += "\r\n"
-    print(text)
+    #print(text)
+    
 
 
-def solveHH(domain: str, folder: str, hyperHeuristic: HyperHeuristic):
+def solveHH(domain: str, folder: str, hyperHeuristic: HyperHeuristic,model:str,type_size:str):
     text = ""
     files = os.listdir(folder)
     files.sort()
-    text += "INSTANCE\tHH\r\n"
     for file in files:
-        text += file + "\t"
+        text += file + ","
         if domain == "KP":
             problem = KP(folder + "/" + file)
         elif domain == "BPP":
@@ -81,8 +81,8 @@ def solveHH(domain: str, folder: str, hyperHeuristic: HyperHeuristic):
             raise Exception("Problem domain '" + domain +
                             "' is not recognized by the system.")
         problem.solveHH(hyperHeuristic)
-        text += str(round(problem.getObjValue(), 3)) + "\r\n"
-    print(text)
+        text += str(round(problem.getObjValue(), 3)) +  "," + model + "," + type_size + "\r\n"
+    return text
 
 # Trains and tests a KNN hyper-heuristic on any of the given problem domains.
 # To test it, uncomment the corresponding code.
