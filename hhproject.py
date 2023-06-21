@@ -7,6 +7,8 @@ from typing import List
 from phermes import HyperHeuristic
 import os
 import numpy as np
+from pathlib import Path
+
 
 
 def characterize(domain: str, folder: str, features: List[str]):
@@ -66,6 +68,7 @@ def solve(domain: str, folder: str, heuristics: List[str]):
 def solveHH(domain: str, folder: str, hyperHeuristic: HyperHeuristic,model:str,type_size:str):
     text = ""
     files = os.listdir(folder)
+    print(folder)
     files.sort()
     for file in files:
         text += file + ","
@@ -81,7 +84,7 @@ def solveHH(domain: str, folder: str, hyperHeuristic: HyperHeuristic,model:str,t
             raise Exception("Problem domain '" + domain +
                             "' is not recognized by the system.")
         problem.solveHH(hyperHeuristic)
-        text += str(round(problem.getObjValue(), 3)) +  "," + model + "," + type_size + "\r\n"
+        text += str(round(problem.getObjValue(), 3)) +  "," + model + "," + type_size + ','+folder.split('/')[-2] + "\r\n"
     return text
 
 # Trains and tests a KNN hyper-heuristic on any of the given problem domains.
